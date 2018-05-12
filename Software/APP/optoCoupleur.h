@@ -11,6 +11,8 @@
 #define MAX_HISTORY_BUFFER	100
 #define SEUIL_DETECTION		40
 
+#define LED_ON_OFF			LATAbits.LATA7
+
 typedef enum
 {
     NO_STATE =  0x0,

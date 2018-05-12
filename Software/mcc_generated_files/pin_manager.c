@@ -53,7 +53,8 @@
 #include "../APP/optoCoupleur.h"
 
 
-void (*IOCBF6_InterruptHandler)(void);
+
+void (*IOCAF6_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
@@ -68,7 +69,7 @@ void PIN_MANAGER_Initialize(void)
     /**
     TRISx registers
     */
-    TRISA = 0xFF;
+    TRISA = 0x7F;
     TRISB = 0xD7;
     TRISC = 0x97;
 
@@ -76,8 +77,8 @@ void PIN_MANAGER_Initialize(void)
     ANSELx registers
     */
     ANSELC = 0xE7;
-    ANSELB = 0xAF;
-    ANSELA = 0xFF;
+    ANSELB = 0xEF;
+    ANSELA = 0xBF;
 
     /**
     WPUx registers
@@ -98,17 +99,17 @@ void PIN_MANAGER_Initialize(void)
     /**
     IOCx registers 
     */
-    //interrupt on change for group IOCBF - flag
-    IOCBFbits.IOCBF6 = 0;
-    //interrupt on change for group IOCBN - negative
-    IOCBNbits.IOCBN6 = 0;
-    //interrupt on change for group IOCBP - positive
-    IOCBPbits.IOCBP6 = 1;
+    //interrupt on change for group IOCAF - flag
+    IOCAFbits.IOCAF6 = 0;
+    //interrupt on change for group IOCAN - negative
+    IOCANbits.IOCAN6 = 0;
+    //interrupt on change for group IOCAP - positive
+    IOCAPbits.IOCAP6 = 1;
 
 
 
     // register default IOC callback functions at runtime; use these methods to register a custom function
-    IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
+    IOCAF6_SetInterruptHandler(IOCAF6_DefaultInterruptHandler);
    
     // Enable IOCI interrupt 
     PIE0bits.IOCIE = 1; 
@@ -124,42 +125,42 @@ void PIN_MANAGER_Initialize(void)
   
 void PIN_MANAGER_IOC(void)
 {   
-	// interrupt on change for pin IOCBF6
-    if(IOCBFbits.IOCBF6 == 1)
+	// interrupt on change for pin IOCAF6
+    if(IOCAFbits.IOCAF6 == 1)
     {
-        IOCBFbits.IOCBF6 = 0;
+        IOCAFbits.IOCAF6 = 0;
         flagButton();
     }	
 }
 
 /**
-   IOCBF6 Interrupt Service Routine
+   IOCAF6 Interrupt Service Routine
 */
-void IOCBF6_ISR(void) {
+void IOCAF6_ISR(void) {
 
-    // Add custom IOCBF6 code
+    // Add custom IOCAF6 code
 
     // Call the interrupt handler for the callback registered at runtime
-    if(IOCBF6_InterruptHandler)
+    if(IOCAF6_InterruptHandler)
     {
-        IOCBF6_InterruptHandler();
+        IOCAF6_InterruptHandler();
     }
-    IOCBFbits.IOCBF6 = 0;
+    IOCAFbits.IOCAF6 = 0;
 }
 
 /**
-  Allows selecting an interrupt handler for IOCBF6 at application runtime
+  Allows selecting an interrupt handler for IOCAF6 at application runtime
 */
-void IOCBF6_SetInterruptHandler(void (* InterruptHandler)(void)){
-    IOCBF6_InterruptHandler = InterruptHandler;
+void IOCAF6_SetInterruptHandler(void (* InterruptHandler)(void)){
+    IOCAF6_InterruptHandler = InterruptHandler;
 }
 
 /**
-  Default interrupt handler for IOCBF6
+  Default interrupt handler for IOCAF6
 */
-void IOCBF6_DefaultInterruptHandler(void){
-    // add your IOCBF6 interrupt custom code
-    // or set custom function using IOCBF6_SetInterruptHandler()
+void IOCAF6_DefaultInterruptHandler(void){
+    // add your IOCAF6 interrupt custom code
+    // or set custom function using IOCAF6_SetInterruptHandler()
 }
 
 /**

@@ -49,7 +49,7 @@ void fillAllScreen(unsigned char color)
 {
 	int lines, lineBis, i;
     SPI1_Start();
-    LATC = 0x20;
+    SCS_PIN = 1;
 
     SPI1_Exchange8bit(WRITE_BIT);
 
@@ -75,7 +75,7 @@ void fillAllScreen(unsigned char color)
     SPI1_Exchange8bit(END_COM);
 
     SPI1_Exchange8bit(END_COM);
-    LATC = 0x00;
+    SCS_PIN = 0;
     SPI1_Stop();
 }
 
@@ -83,7 +83,6 @@ void drawFont(const uint8_t x, const uint8_t y, const uint8_t toPrint[], const u
 {
     SPI1_Start();
     SCS_PIN = 1;
-    LATC = 0x20;
     uint8_t colonne = 0;
     uint8_t lineBis = 0;
     uint8_t lines = 0;
@@ -119,7 +118,6 @@ void drawFont(const uint8_t x, const uint8_t y, const uint8_t toPrint[], const u
     }
     
     SPI1_Exchange8bit(END_COM);
-    LATC = 0x00;
     SPI1_Stop();
 }
 

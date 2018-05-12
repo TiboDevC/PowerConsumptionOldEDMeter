@@ -59,6 +59,46 @@
 #define PULL_UP_ENABLED      1
 #define PULL_UP_DISABLED     0
 
+// get/set BUTTON aliases
+#define BUTTON_TRIS                 TRISAbits.TRISA6
+#define BUTTON_LAT                  LATAbits.LATA6
+#define BUTTON_PORT                 PORTAbits.RA6
+#define BUTTON_WPU                  WPUAbits.WPUA6
+#define BUTTON_OD                   ODCONAbits.ODCA6
+#define BUTTON_ANS                  ANSELAbits.ANSA6
+#define BUTTON_SetHigh()            do { LATAbits.LATA6 = 1; } while(0)
+#define BUTTON_SetLow()             do { LATAbits.LATA6 = 0; } while(0)
+#define BUTTON_Toggle()             do { LATAbits.LATA6 = ~LATAbits.LATA6; } while(0)
+#define BUTTON_GetValue()           PORTAbits.RA6
+#define BUTTON_SetDigitalInput()    do { TRISAbits.TRISA6 = 1; } while(0)
+#define BUTTON_SetDigitalOutput()   do { TRISAbits.TRISA6 = 0; } while(0)
+#define BUTTON_SetPullup()          do { WPUAbits.WPUA6 = 1; } while(0)
+#define BUTTON_ResetPullup()        do { WPUAbits.WPUA6 = 0; } while(0)
+#define BUTTON_SetPushPull()        do { ODCONAbits.ODCA6 = 0; } while(0)
+#define BUTTON_SetOpenDrain()       do { ODCONAbits.ODCA6 = 1; } while(0)
+#define BUTTON_SetAnalogMode()      do { ANSELAbits.ANSA6 = 1; } while(0)
+#define BUTTON_SetDigitalMode()     do { ANSELAbits.ANSA6 = 0; } while(0)
+
+// get/set ENABLE_OPTO aliases
+#define ENABLE_OPTO_TRIS                 TRISAbits.TRISA7
+#define ENABLE_OPTO_LAT                  LATAbits.LATA7
+#define ENABLE_OPTO_PORT                 PORTAbits.RA7
+#define ENABLE_OPTO_WPU                  WPUAbits.WPUA7
+#define ENABLE_OPTO_OD                   ODCONAbits.ODCA7
+#define ENABLE_OPTO_ANS                  ANSELAbits.ANSA7
+#define ENABLE_OPTO_SetHigh()            do { LATAbits.LATA7 = 1; } while(0)
+#define ENABLE_OPTO_SetLow()             do { LATAbits.LATA7 = 0; } while(0)
+#define ENABLE_OPTO_Toggle()             do { LATAbits.LATA7 = ~LATAbits.LATA7; } while(0)
+#define ENABLE_OPTO_GetValue()           PORTAbits.RA7
+#define ENABLE_OPTO_SetDigitalInput()    do { TRISAbits.TRISA7 = 1; } while(0)
+#define ENABLE_OPTO_SetDigitalOutput()   do { TRISAbits.TRISA7 = 0; } while(0)
+#define ENABLE_OPTO_SetPullup()          do { WPUAbits.WPUA7 = 1; } while(0)
+#define ENABLE_OPTO_ResetPullup()        do { WPUAbits.WPUA7 = 0; } while(0)
+#define ENABLE_OPTO_SetPushPull()        do { ODCONAbits.ODCA7 = 0; } while(0)
+#define ENABLE_OPTO_SetOpenDrain()       do { ODCONAbits.ODCA7 = 1; } while(0)
+#define ENABLE_OPTO_SetAnalogMode()      do { ANSELAbits.ANSA7 = 1; } while(0)
+#define ENABLE_OPTO_SetDigitalMode()     do { ANSELAbits.ANSA7 = 0; } while(0)
+
 // get/set OPTO_INPUT aliases
 #define OPTO_INPUT_TRIS                 TRISBbits.TRISB0
 #define OPTO_INPUT_LAT                  LATBbits.LATB0
@@ -122,26 +162,6 @@
 #define ESP_ON_OFF_SetOpenDrain()       do { ODCONBbits.ODCB5 = 1; } while(0)
 #define ESP_ON_OFF_SetAnalogMode()      do { ANSELBbits.ANSB5 = 1; } while(0)
 #define ESP_ON_OFF_SetDigitalMode()     do { ANSELBbits.ANSB5 = 0; } while(0)
-
-// get/set BUTTON aliases
-#define BUTTON_TRIS                 TRISBbits.TRISB6
-#define BUTTON_LAT                  LATBbits.LATB6
-#define BUTTON_PORT                 PORTBbits.RB6
-#define BUTTON_WPU                  WPUBbits.WPUB6
-#define BUTTON_OD                   ODCONBbits.ODCB6
-#define BUTTON_ANS                  ANSELBbits.ANSB6
-#define BUTTON_SetHigh()            do { LATBbits.LATB6 = 1; } while(0)
-#define BUTTON_SetLow()             do { LATBbits.LATB6 = 0; } while(0)
-#define BUTTON_Toggle()             do { LATBbits.LATB6 = ~LATBbits.LATB6; } while(0)
-#define BUTTON_GetValue()           PORTBbits.RB6
-#define BUTTON_SetDigitalInput()    do { TRISBbits.TRISB6 = 1; } while(0)
-#define BUTTON_SetDigitalOutput()   do { TRISBbits.TRISB6 = 0; } while(0)
-#define BUTTON_SetPullup()          do { WPUBbits.WPUB6 = 1; } while(0)
-#define BUTTON_ResetPullup()        do { WPUBbits.WPUB6 = 0; } while(0)
-#define BUTTON_SetPushPull()        do { ODCONBbits.ODCB6 = 0; } while(0)
-#define BUTTON_SetOpenDrain()       do { ODCONBbits.ODCB6 = 1; } while(0)
-#define BUTTON_SetAnalogMode()      do { ANSELBbits.ANSB6 = 1; } while(0)
-#define BUTTON_SetDigitalMode()     do { ANSELBbits.ANSB6 = 0; } while(0)
 
 // get/set SCK1 aliases
 #define SCK1_TRIS                 TRISCbits.TRISC3
@@ -254,18 +274,18 @@ void PIN_MANAGER_IOC(void);
  * @Returns
     none
  * @Description
-    Interrupt on Change Handler for the IOCBF6 pin functionality
+    Interrupt on Change Handler for the IOCAF6 pin functionality
  * @Example
-    IOCBF6_ISR();
+    IOCAF6_ISR();
  */
-void IOCBF6_ISR(void);
+void IOCAF6_ISR(void);
 
 /**
   @Summary
-    Interrupt Handler Setter for IOCBF6 pin interrupt-on-change functionality
+    Interrupt Handler Setter for IOCAF6 pin interrupt-on-change functionality
 
   @Description
-    Allows selecting an interrupt handler for IOCBF6 at application runtime
+    Allows selecting an interrupt handler for IOCAF6 at application runtime
     
   @Preconditions
     Pin Manager intializer called
@@ -278,18 +298,18 @@ void IOCBF6_ISR(void);
 
   @Example
     PIN_MANAGER_Initialize();
-    IOCBF6_SetInterruptHandler(MyInterruptHandler);
+    IOCAF6_SetInterruptHandler(MyInterruptHandler);
 
 */
-void IOCBF6_SetInterruptHandler(void (* InterruptHandler)(void));
+void IOCAF6_SetInterruptHandler(void (* InterruptHandler)(void));
 
 /**
   @Summary
-    Dynamic Interrupt Handler for IOCBF6 pin
+    Dynamic Interrupt Handler for IOCAF6 pin
 
   @Description
-    This is a dynamic interrupt handler to be used together with the IOCBF6_SetInterruptHandler() method.
-    This handler is called every time the IOCBF6 ISR is executed and allows any function to be registered at runtime.
+    This is a dynamic interrupt handler to be used together with the IOCAF6_SetInterruptHandler() method.
+    This handler is called every time the IOCAF6 ISR is executed and allows any function to be registered at runtime.
     
   @Preconditions
     Pin Manager intializer called
@@ -302,18 +322,18 @@ void IOCBF6_SetInterruptHandler(void (* InterruptHandler)(void));
 
   @Example
     PIN_MANAGER_Initialize();
-    IOCBF6_SetInterruptHandler(IOCBF6_InterruptHandler);
+    IOCAF6_SetInterruptHandler(IOCAF6_InterruptHandler);
 
 */
-extern void (*IOCBF6_InterruptHandler)(void);
+extern void (*IOCAF6_InterruptHandler)(void);
 
 /**
   @Summary
-    Default Interrupt Handler for IOCBF6 pin
+    Default Interrupt Handler for IOCAF6 pin
 
   @Description
-    This is a predefined interrupt handler to be used together with the IOCBF6_SetInterruptHandler() method.
-    This handler is called every time the IOCBF6 ISR is executed. 
+    This is a predefined interrupt handler to be used together with the IOCAF6_SetInterruptHandler() method.
+    This handler is called every time the IOCAF6 ISR is executed. 
     
   @Preconditions
     Pin Manager intializer called
@@ -326,10 +346,10 @@ extern void (*IOCBF6_InterruptHandler)(void);
 
   @Example
     PIN_MANAGER_Initialize();
-    IOCBF6_SetInterruptHandler(IOCBF6_DefaultInterruptHandler);
+    IOCAF6_SetInterruptHandler(IOCAF6_DefaultInterruptHandler);
 
 */
-void IOCBF6_DefaultInterruptHandler(void);
+void IOCAF6_DefaultInterruptHandler(void);
 
 
 

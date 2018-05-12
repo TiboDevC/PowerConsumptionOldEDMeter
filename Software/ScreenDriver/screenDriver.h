@@ -8,7 +8,7 @@
 #ifndef SCREENDRIVER_H
 #define	SCREENDRIVER_H
 
-#define SCS_PIN 		LATAbits.LATA5
+#define SCS_PIN 		LATCbits.LATC5
 #define CLEAR_SCREEN 	(0x20)
 #define END_COM		 	(0x00)
 #define WRITE_BIT	 	(0x80)
