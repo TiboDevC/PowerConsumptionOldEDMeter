@@ -15,7 +15,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.02
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB 	          :  MPLAB X 4.15
@@ -65,11 +65,12 @@
   Section: Macro Declarations
 */
 
-#define DUMMY_DATA 0x0
+#define SPI1_DUMMY_DATA 0x0
 
+        
 void SPI1_Start(void);
 void SPI1_Stop(void);
-
+        
 /**
   Section: SPI1 Module APIs
 */
@@ -149,7 +150,7 @@ void SPI1_Initialize(void);
     readDummy = SPI1_Exchange8bit(writeData);
 
     // for reception over SPI bus
-    readData = SPI1_Exchange8bit(DUMMY_DATA);
+    readData = SPI1_Exchange8bit(SPI1_DUMMY_DATA);
     </code>
  */
 uint8_t SPI1_Exchange8bit(uint8_t data);

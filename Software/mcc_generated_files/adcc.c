@@ -15,7 +15,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.13
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB             :  MPLAB X 4.15
@@ -98,6 +98,8 @@ void ADCC_Initialize(void)
     ADCLK = 0x00;
     // ADGO stop; ADFM right; ADON enabled; ADCONT disabled; ADCS FOSC/ADCLK; 
     ADCON0 = 0x84;
+    // ADACQ 0; 
+    ADACQ = 0x00;
     
     // Clear the ADC interrupt flag
     PIR1bits.ADIF = 0;
@@ -172,7 +174,7 @@ void ADCC_SetStopOnInterrupt(void)
 void ADCC_DischargeSampleCapacitor(void)
 {
     //Set the ADC channel to AVss.
-    ADPCH = 0x3C;   
+    ADPCH = 0x3c;   
 }
 
 void ADCC_LoadAcquisitionRegister(uint8_t acquisitionValue)

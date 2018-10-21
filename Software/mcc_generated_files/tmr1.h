@@ -15,7 +15,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB 	          :  MPLAB X 4.15
@@ -59,7 +59,7 @@
     extern "C" {
 
 #endif
-
+        
 typedef struct Time_s
 {
   unsigned char milliseconde;
@@ -81,6 +81,7 @@ typedef struct Time_s
 
 void TMR1_RegisterTimer(uint8_t app);
 void TMR1_UnRegisterTimer(uint8_t app);
+
 
 /**
   Section: TMR1 APIs

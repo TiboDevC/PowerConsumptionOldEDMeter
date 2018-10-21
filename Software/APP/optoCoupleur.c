@@ -1,6 +1,6 @@
 /*
  * File:   optoCoupleur.c
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 9, 2018, 11:00 AM
  */

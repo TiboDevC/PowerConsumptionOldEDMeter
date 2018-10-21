@@ -16,7 +16,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.02
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB 	          :  MPLAB X 4.15
@@ -83,8 +83,8 @@ void SPI1_Initialize(void)
     // SMP Middle; CKE Idle to Active; 
     SSP1STAT = 0x00;
     
-    // SSPEN enabled; CKP Idle:Low, Active:High; SSPM FOSC/4; 
-    SSP1CON1 = 0x20;
+    // SSPEN enabled; CKP Idle:Low, Active:High; SSPM FOSC/64; 
+    SSP1CON1 = 0x22;
     
     // SSPADD 0; 
     SSP1ADD = 0x00;
@@ -132,7 +132,7 @@ uint8_t SPI1_Exchange8bitBuffer(uint8_t *dataIn, uint8_t bufLen, uint8_t *dataOu
             {
                 while(bytesWritten < bufLen )
                 {
-                    dataOut[bytesWritten] = SPI1_Exchange8bit(DUMMY_DATA);
+                    dataOut[bytesWritten] = SPI1_Exchange8bit(SPI1_DUMMY_DATA);
 
                     bytesWritten++;
                 }

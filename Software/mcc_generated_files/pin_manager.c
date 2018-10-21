@@ -15,7 +15,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB             :  MPLAB X 4.15
@@ -50,11 +50,8 @@
 #include "pin_manager.h"
 #include "stdbool.h"
 
-#include "../APP/optoCoupleur.h"
 
 
-
-void (*IOCAF6_InterruptHandler)(void);
 
 
 void PIN_MANAGER_Initialize(void)
@@ -70,7 +67,7 @@ void PIN_MANAGER_Initialize(void)
     TRISx registers
     */
     TRISA = 0x7F;
-    TRISB = 0xD7;
+    TRISB = 0xF7;
     TRISC = 0x97;
 
     /**
@@ -95,72 +92,30 @@ void PIN_MANAGER_Initialize(void)
     ODCONB = 0x00;
     ODCONC = 0x00;
 
-
     /**
-    IOCx registers 
+    SLRCONx registers
     */
-    //interrupt on change for group IOCAF - flag
-    IOCAFbits.IOCAF6 = 0;
-    //interrupt on change for group IOCAN - negative
-    IOCANbits.IOCAN6 = 0;
-    //interrupt on change for group IOCAP - positive
-    IOCAPbits.IOCAP6 = 1;
+    SLRCONA = 0xFF;
+    SLRCONB = 0xFF;
+    SLRCONC = 0xFF;
 
 
 
-    // register default IOC callback functions at runtime; use these methods to register a custom function
-    IOCAF6_SetInterruptHandler(IOCAF6_DefaultInterruptHandler);
+
+
    
-    // Enable IOCI interrupt 
-    PIE0bits.IOCIE = 1; 
     
 	
-    SSP1CLKPPSbits.SSP1CLKPPS = 0x13;   //RC3->MSSP1:SCK1;    
-    SSP1DATPPSbits.SSP1DATPPS = 0x14;   //RC4->MSSP1:SDI1;    
-    RXPPSbits.RXPPS = 0x0C;   //RB4->EUSART:RX;    
+    RXPPS = 0x0C;   //RB4->EUSART:RX;    
+    SSP1CLKPPS = 0x13;   //RC3->MSSP1:SCK1;    
     RC3PPS = 0x14;   //RC3->MSSP1:SCK1;    
     RB3PPS = 0x10;   //RB3->EUSART:TX;    
     RC6PPS = 0x15;   //RC6->MSSP1:SDO1;    
+    SSP1DATPPS = 0x14;   //RC4->MSSP1:SDI1;    
 }
   
 void PIN_MANAGER_IOC(void)
 {   
-	// interrupt on change for pin IOCAF6
-    if(IOCAFbits.IOCAF6 == 1)
-    {
-        IOCAFbits.IOCAF6 = 0;
-        flagButton();
-    }	
-}
-
-/**
-   IOCAF6 Interrupt Service Routine
-*/
-void IOCAF6_ISR(void) {
-
-    // Add custom IOCAF6 code
-
-    // Call the interrupt handler for the callback registered at runtime
-    if(IOCAF6_InterruptHandler)
-    {
-        IOCAF6_InterruptHandler();
-    }
-    IOCAFbits.IOCAF6 = 0;
-}
-
-/**
-  Allows selecting an interrupt handler for IOCAF6 at application runtime
-*/
-void IOCAF6_SetInterruptHandler(void (* InterruptHandler)(void)){
-    IOCAF6_InterruptHandler = InterruptHandler;
-}
-
-/**
-  Default interrupt handler for IOCAF6
-*/
-void IOCAF6_DefaultInterruptHandler(void){
-    // add your IOCAF6 interrupt custom code
-    // or set custom function using IOCAF6_SetInterruptHandler()
 }
 
 /**

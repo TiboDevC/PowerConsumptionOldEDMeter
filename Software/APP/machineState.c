@@ -1,6 +1,6 @@
 /*
  * File:   machineState.c
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 9, 2018, 3:36 PM
  */

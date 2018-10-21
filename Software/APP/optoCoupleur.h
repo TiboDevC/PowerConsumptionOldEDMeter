@@ -1,6 +1,6 @@
 /* 
  * File:   optoCoupleur.h
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 9, 2018, 11:01 AM
  */
@@ -28,4 +28,3 @@ void flagButton();
 void initSeuils();
 
 #endif	/* OPTOCOUPLEUR_H */
-

@@ -15,7 +15,7 @@
     Generation Information :
         Product Revision  :  PIC10 / PIC12 / PIC16 / PIC18 MCUs - 1.65.2
         Device            :  PIC16F18857
-        Driver Version    :  2.01
+        Driver Version    :  2.11
     The generated drivers are tested against the following:
         Compiler          :  XC8 1.45
         MPLAB 	          :  MPLAB X 4.15
@@ -79,11 +79,11 @@ void TMR1_Initialize(void)
     //CS LFINTOSC; 
     T1CLK = 0x04;
 
-    //TMR1H 231; 
-    TMR1H = 0xE7;
+    //TMR1H 134; 
+    TMR1H = 0x86;
 
-    //TMR1L 200; 
-    TMR1L = 0xC8;
+    //TMR1L 232; 
+    TMR1L = 0xE8;
 
     // Load the TMR value to reload variable
     timer1ReloadVal=(uint16_t)((TMR1H << 8) | TMR1L);
@@ -95,17 +95,14 @@ void TMR1_Initialize(void)
     PIE4bits.TMR1IE = 1;
 
     // Set Default Interrupt Handler
-    //TMR1_SetInterruptHandler(TMR1_DefaultInterruptHandler);
+    TMR1_SetInterruptHandler(TMR1_DefaultInterruptHandler);
 
     // CKPS 1:1; nT1SYNC synchronize; TMR1ON enabled; T1RD16 disabled; 
     T1CON = 0x01;
-
-    registerApp = TIMER1_NOT_USED;
 }
 
 void TMR1_StartTimer(void)
 {
-    PIR4bits.TMR1IF = 0;
     // Start the Timer by writing to TMRxON bit
     T1CONbits.TMR1ON = 1;
 }
@@ -123,7 +120,7 @@ uint16_t TMR1_ReadTimer(void)
     uint8_t readValLow;
     
     T1CONbits.T1RD16 = 1;
-    
+	
     readValLow = TMR1L;
     readValHigh = TMR1H;
     
@@ -176,22 +173,9 @@ void TMR1_ISR(void)
     PIR4bits.TMR1IF = 0;
     TMR1_WriteTimer(timer1ReloadVal);
 
-    if(registerApp == TIMER1_NOT_USED)
+    if(TMR1_InterruptHandler)
     {
-        return;
-    }
-
-    if((registerApp & TIMER1_SCREEN) == TIMER1_SCREEN)
-    {
-        updateScreen();
-    }
-    if((registerApp & TIMER1_ADC) == TIMER1_ADC)
-    {
-        flagConvertion();
-    }
-    if((registerApp & TIMER1_MACHINE_STATE) == TIMER1_MACHINE_STATE)
-    {
-        manageMachineState();
+        TMR1_InterruptHandler();
     }
 }
 

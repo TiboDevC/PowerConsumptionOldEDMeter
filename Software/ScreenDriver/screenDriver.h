@@ -1,6 +1,6 @@
 /* 
  * File:   screenDriver.h
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 8, 2018, 12:32 PM
  */

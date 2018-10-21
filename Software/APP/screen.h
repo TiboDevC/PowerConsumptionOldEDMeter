@@ -1,6 +1,6 @@
 /* 
  * File:   screen.h
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 9, 2018, 10:06 AM
  */
@@ -12,4 +12,3 @@ void updateScreen();
 void displayScreen();
 
 #endif	/* SCREEN_H */
-

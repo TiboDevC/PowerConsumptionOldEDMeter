@@ -1,6 +1,6 @@
 /* 
  * File:   machineState.h
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 9, 2018, 3:36 PM
  */
@@ -11,4 +11,3 @@
 void manageMachineState();
 
 #endif	/* MACHINESTATE_H */
-

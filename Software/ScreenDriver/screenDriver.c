@@ -1,6 +1,7 @@
+
 /*
  * File:   screenDriver.c
- * Author: tmazery
+ * Author: TiboDevC
  *
  * Created on May 8, 2018, 12:30 PM
  */
